@@ -57,12 +57,12 @@ export const chapter7Data: ChapterData = {
       ],
       interactions: [
         {
-          type: InteractionType.QUIZ,
-          question: "¿Qué nos enseña Jesús sobre las relaciones familiares?",
-          options: [
-            { text: "Son irrelevantes para el Reino", isCorrect: false },
-            { text: "Deben estar bajo el señorío de Cristo", isCorrect: true },
-            { text: "Siempre deben ir primero que el llamado", isCorrect: false }
+          type: InteractionType.SORTING,
+          question: "Ordena las prioridades del Reino (1-3):",
+          sortingItems: [
+            { id: 'a', text: "Llamado de Dios", order: 1 },
+            { id: 'b', text: "Lazos Familiares", order: 2 },
+            { id: 'c', text: "Bienes Materiales", order: 3 }
           ]
         }
       ]
@@ -135,12 +135,12 @@ export const chapter7Data: ChapterData = {
       ],
       interactions: [
         {
-          type: InteractionType.MATCHING,
-          question: "Contrasta los liderazgos:",
-          pairs: [
-            { id: '1', left: "Mundo", right: "Dominio" },
-            { id: '2', left: "Reino", right: "Servicio" },
-            { id: '3', left: "Jesús", right: "Rescate" }
+          type: InteractionType.QUIZ,
+          question: "¿Cuál es la medida de grandeza en el Reino?",
+          options: [
+            { text: "Tener autoridad sobre otros", isCorrect: false },
+            { text: "Ser el servidor de todos", isCorrect: true },
+            { text: "Estar a la derecha de Jesús", isCorrect: false }
           ]
         }
       ]

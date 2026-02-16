@@ -1,7 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { Interaction, InteractionType } from '../types';
-import { geminiService } from '../services/geminiService';
 
 interface Props {
   interaction: Interaction;
@@ -10,7 +9,7 @@ interface Props {
 
 export const InteractionView: React.FC<Props> = ({ interaction, pageTitle }) => {
   const [reflection, setReflection] = useState('');
-  const [aiInsight, setAiInsight] = useState('');
+  const [staticInsight, setStaticInsight] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [tfAnswer, setTfAnswer] = useState<boolean | null>(null);
@@ -25,18 +24,34 @@ export const InteractionView: React.FC<Props> = ({ interaction, pageTitle }) => 
   const [puzzleInput, setPuzzleInput] = useState<string[]>([]);
   const [isPuzzleSolved, setIsPuzzleSolved] = useState(false);
 
+  // States for Sorting Game
+  const [sortingItems, setSortingItems] = useState<{ id: string, text: string, order: number }[]>([]);
+  const [isSortedCorrectly, setIsSortedCorrectly] = useState(false);
+
   useEffect(() => {
     if (interaction.type === InteractionType.WORD_PUZZLE && interaction.puzzleWord) {
       setPuzzleInput(new Array(interaction.puzzleWord.length).fill(''));
     }
+    if (interaction.type === InteractionType.SORTING && interaction.sortingItems) {
+      // Shuffle items for sorting
+      setSortingItems([...interaction.sortingItems].sort(() => Math.random() - 0.5));
+    }
   }, [interaction]);
 
-  const handleReflectionSubmit = async () => {
+  const handleReflectionSubmit = () => {
     if (!reflection.trim()) return;
     setIsLoading(true);
-    const insight = await geminiService.getReflectionInsight(reflection, pageTitle);
-    setAiInsight(insight);
-    setIsLoading(false);
+    // Simulating deep analysis with static local logic
+    setTimeout(() => {
+      const insights = [
+        "Tu reflexión demuestra una profunda comprensión del discipulado. ¡Sigue adelante!",
+        "Es valioso identificar estas áreas en tu vida. La gracia de Dios te fortalece.",
+        "Analizar el corazón es el primer paso para la transformación real en el Reino.",
+        "Excelente análisis. Recuerda que el seguimiento a Jesús es diario y radical."
+      ];
+      setStaticInsight(insights[Math.floor(Math.random() * insights.length)]);
+      setIsLoading(false);
+    }, 800);
   };
 
   const handlePuzzleInput = (index: number, val: string) => {
@@ -49,7 +64,6 @@ export const InteractionView: React.FC<Props> = ({ interaction, pageTitle }) => 
       setIsPuzzleSolved(true);
     }
     
-    // Auto-focus next input
     if (newVal && index < (interaction.puzzleWord?.length || 0) - 1) {
       const nextInput = document.getElementById(`puzzle-${index + 1}`);
       nextInput?.focus();
@@ -74,6 +88,18 @@ export const InteractionView: React.FC<Props> = ({ interaction, pageTitle }) => 
         }, 600);
       }
     }
+  };
+
+  const moveItem = (index: number, direction: 'up' | 'down') => {
+    const newItems = [...sortingItems];
+    const targetIndex = direction === 'up' ? index - 1 : index + 1;
+    if (targetIndex < 0 || targetIndex >= newItems.length) return;
+    
+    [newItems[index], newItems[targetIndex]] = [newItems[targetIndex], newItems[index]];
+    setSortingItems(newItems);
+
+    const isCorrect = newItems.every((item, idx) => item.order === idx + 1);
+    if (isCorrect) setIsSortedCorrectly(true);
   };
 
   const renderInteraction = () => {
@@ -102,6 +128,27 @@ export const InteractionView: React.FC<Props> = ({ interaction, pageTitle }) => 
                 ¡LOGRADO! <i className="fas fa-trophy ml-1"></i>
               </div>
             )}
+          </div>
+        );
+
+      case InteractionType.SORTING:
+        return (
+          <div className="space-y-3">
+            <p className="text-[10px] text-slate-400 mb-2 italic">Usa las flechas para ordenar:</p>
+            <div className="space-y-2">
+              {sortingItems.map((item, i) => (
+                <div key={item.id} className={`flex items-center gap-3 p-3 rounded-xl border-2 transition-all ${isSortedCorrectly ? 'bg-green-50 border-green-500 text-green-700' : 'bg-white border-slate-50'}`}>
+                  <span className="text-xs font-bold flex-1">{item.text}</span>
+                  {!isSortedCorrectly && (
+                    <div className="flex gap-1">
+                      <button onClick={() => moveItem(i, 'up')} className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center"><i className="fas fa-chevron-up text-[10px]"></i></button>
+                      <button onClick={() => moveItem(i, 'down')} className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center"><i className="fas fa-chevron-down text-[10px]"></i></button>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+            {isSortedCorrectly && <div className="text-center text-green-600 font-black text-[10px] animate-pulse">¡ORDEN CORRECTO!</div>}
           </div>
         );
 
@@ -217,23 +264,19 @@ export const InteractionView: React.FC<Props> = ({ interaction, pageTitle }) => 
                 onClick={handleReflectionSubmit}
                 className="absolute bottom-3 right-3 w-10 h-10 bg-indigo-900 text-white rounded-xl flex items-center justify-center shadow-lg active:scale-90 disabled:opacity-30"
               >
-                {isLoading ? <i className="fas fa-microchip fa-spin"></i> : <i className="fas fa-search-plus text-xs"></i>}
+                {isLoading ? <i className="fas fa-cog fa-spin"></i> : <i className="fas fa-check text-xs"></i>}
               </button>
             </div>
-            {aiInsight && (
+            {staticInsight && (
               <div className="bg-slate-900 p-5 rounded-2xl rounded-tr-none shadow-2xl animate-fade-in-up border border-indigo-500/30">
                 <div className="flex items-center gap-2 mb-3 border-b border-white/10 pb-2">
                   <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                  <span className="text-[8px] font-black uppercase text-indigo-400 tracking-[0.2em]">Minería de Datos Espirituales</span>
+                  <span className="text-[8px] font-black uppercase text-indigo-400 tracking-[0.2em]">SISTEMA ANALÍTICO LOCAL</span>
                 </div>
                 <p className="text-indigo-50 text-[11px] font-medium leading-relaxed italic">
                   <i className="fas fa-quote-left text-[8px] mr-2 text-indigo-400"></i>
-                  {aiInsight}
+                  {staticInsight}
                 </p>
-                <div className="mt-3 flex gap-2">
-                   <span className="text-[7px] bg-indigo-500/20 text-indigo-300 px-2 py-0.5 rounded border border-indigo-500/30">SINCERIDAD: 98%</span>
-                   <span className="text-[7px] bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded border border-purple-500/30">PESO TEOLÓGICO: ALTO</span>
-                </div>
               </div>
             )}
           </div>
@@ -267,7 +310,7 @@ export const InteractionView: React.FC<Props> = ({ interaction, pageTitle }) => 
     <div className="bg-white/70 rounded-[2.5rem] p-6 border border-white shadow-xl backdrop-blur-md">
       <div className="flex items-center gap-2 mb-5">
          <div className="w-6 h-6 rounded-full bg-indigo-50 flex items-center justify-center">
-            <i className={`fas ${interaction.type === InteractionType.WORD_PUZZLE ? 'fa-puzzle-piece' : 'fa-bolt'} text-[10px] text-indigo-500`}></i>
+            <i className={`fas ${interaction.type === InteractionType.WORD_PUZZLE ? 'fa-puzzle-piece' : interaction.type === InteractionType.SORTING ? 'fa-sort-amount-down' : 'fa-bolt'} text-[10px] text-indigo-500`}></i>
          </div>
          <h3 className="text-[11px] font-black text-slate-500 leading-tight uppercase tracking-wider">
            {interaction.question}

@@ -5,7 +5,8 @@ export enum InteractionType {
   REFLECTION = 'REFLECTION',
   TRUE_FALSE = 'TRUE_FALSE',
   MATCHING = 'MATCHING',
-  WORD_PUZZLE = 'WORD_PUZZLE'
+  WORD_PUZZLE = 'WORD_PUZZLE',
+  SORTING = 'SORTING'
 }
 
 export interface QuizOption {
@@ -29,6 +30,7 @@ export interface Interaction {
   placeholder?: string;
   puzzleWord?: string; // For WORD_PUZZLE
   puzzleHint?: string;
+  sortingItems?: { id: string, text: string, order: number }[]; // For SORTING
 }
 
 export interface PageContent {

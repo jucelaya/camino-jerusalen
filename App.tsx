@@ -28,7 +28,7 @@ const App: React.FC = () => {
   if (!hasStarted) {
     return (
       <div className="fixed inset-0 bg-[#0A0E1A] flex flex-col items-center justify-center p-8 text-center overflow-hidden">
-        {/* Futuristic Background */}
+        {/* Estética de Inteligencia Profunda / Dashboard Moderno */}
         <div className="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none">
            <div className="absolute top-[-20%] right-[-20%] w-[500px] h-[500px] bg-indigo-600 rounded-full blur-[120px]"></div>
            <div className="absolute bottom-[-20%] left-[-20%] w-[400px] h-[400px] bg-purple-600 rounded-full blur-[100px]"></div>
@@ -41,31 +41,31 @@ const App: React.FC = () => {
               <i className="fas fa-brain text-5xl text-indigo-400"></i>
             </div>
             <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center border-4 border-[#0A0E1A] animate-bounce">
-              <i className="fas fa-star text-white text-xs"></i>
+              <i className="fas fa-rocket text-white text-xs"></i>
             </div>
           </div>
           
           <div className="space-y-4">
             <div className="flex justify-center gap-1">
-              <span className="text-[10px] font-black text-indigo-500 tracking-[0.3em] uppercase">Deep Learning Edition</span>
+              <span className="text-[10px] font-black text-indigo-500 tracking-[0.3em] uppercase">Módulo Interactivo Estático</span>
             </div>
             <h1 className="text-5xl font-black text-white leading-[0.9] tracking-tighter uppercase">
               CAMINO A <br/><span className="text-transparent bg-clip-text bg-gradient-to-br from-indigo-400 via-purple-400 to-pink-400">JERUSALÉN</span>
             </h1>
             <div className="h-0.5 w-16 bg-gradient-to-r from-transparent via-indigo-500 to-transparent mx-auto"></div>
-            <p className="text-indigo-200/60 font-medium text-sm">Capítulo 7: El Discipulado Radical</p>
+            <p className="text-indigo-200/60 font-medium text-sm">Capítulo 7: Resumen Dinámico</p>
           </div>
 
           <p className="text-slate-400 text-xs leading-relaxed px-6 opacity-80 font-medium">
-            Analiza el texto de Stuart Briscoe mediante minería de datos espirituales y juegos interactivos de alta precisión.
+            Una experiencia pedagógica de alta fidelidad basada en el texto de Stuart Briscoe. 100% Funcional sin conexión.
           </p>
 
           <button 
             onClick={() => setHasStarted(true)}
             className="w-full bg-white text-[#0A0E1A] py-6 rounded-3xl font-black text-sm tracking-widest shadow-2xl active:scale-95 transition-all flex items-center justify-center gap-4 group"
           >
-            INICIAR ANÁLISIS
-            <i className="fas fa-terminal text-[10px] group-hover:translate-x-1 transition-transform"></i>
+            EXPLORAR CAPÍTULO
+            <i className="fas fa-play text-[10px] group-hover:translate-x-1 transition-transform"></i>
           </button>
         </div>
       </div>
@@ -78,26 +78,26 @@ const App: React.FC = () => {
         <div className="w-24 h-24 bg-gradient-to-br from-green-400 to-emerald-600 text-white rounded-[2rem] flex items-center justify-center text-4xl mb-8 shadow-2xl shadow-green-500/20">
           <i className="fas fa-check-double"></i>
         </div>
-        <h2 className="text-4xl font-black text-white mb-3 tracking-tighter">ANÁLISIS COMPLETO</h2>
-        <p className="text-slate-400 mb-10 text-sm font-medium">Capítulo 7 procesado con éxito. El discipulado es una jornada eterna.</p>
+        <h2 className="text-4xl font-black text-white mb-3 tracking-tighter">ANÁLISIS COMPLETADO</h2>
+        <p className="text-slate-400 mb-10 text-sm font-medium">Has procesado todos los puntos clave del Capítulo 7. ¡Buen trabajo!</p>
         
         <div className="bg-white/5 backdrop-blur-md p-8 rounded-[3rem] border border-white/10 w-full max-w-xs mb-10 text-left relative overflow-hidden">
           <div className="absolute top-0 right-0 p-4 opacity-10">
-            <i className="fas fa-microchip text-6xl text-white"></i>
+            <i className="fas fa-medal text-6xl text-white"></i>
           </div>
-          <h3 className="text-[10px] font-black text-indigo-400 uppercase mb-6 tracking-[0.2em]">Insights Extraídos</h3>
+          <h3 className="text-[10px] font-black text-indigo-400 uppercase mb-6 tracking-[0.2em]">Resumen de Logros</h3>
           <div className="space-y-4">
             <div className="flex gap-3 items-center">
               <div className="w-2 h-2 rounded-full bg-indigo-500"></div>
-              <p className="text-white text-xs font-bold">Prioridad Divina > Lazos Humanos</p>
+              <p className="text-white text-xs font-bold">Conceptos de Gracia vs Mérito</p>
             </div>
             <div className="flex gap-3 items-center">
               <div className="w-2 h-2 rounded-full bg-purple-500"></div>
-              <p className="text-white text-xs font-bold">Gracia Soberana vs Mérito</p>
+              <p className="text-white text-xs font-bold">Modelo de Liderazgo de Servicio</p>
             </div>
             <div className="flex gap-3 items-center">
               <div className="w-2 h-2 rounded-full bg-pink-500"></div>
-              <p className="text-white text-xs font-bold">Grandeza = Servicio Radical</p>
+              <p className="text-white text-xs font-bold">Compromiso de Acción Radical</p>
             </div>
           </div>
         </div>
@@ -106,7 +106,7 @@ const App: React.FC = () => {
           onClick={() => { setHasStarted(false); setIsCompleted(false); setCurrentPageIndex(0); }}
           className="text-indigo-400 text-[10px] font-black tracking-widest uppercase border-b border-indigo-500/30 pb-1"
         >
-          Reiniciar Sistema de Aprendizaje
+          Volver al Inicio
         </button>
       </div>
     );
@@ -118,11 +118,11 @@ const App: React.FC = () => {
         <div className="flex justify-between items-center mb-4">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 bg-[#0A0E1A] rounded-xl flex items-center justify-center text-indigo-400 text-xs shadow-lg">
-              <i className="fas fa-atom"></i>
+              <i className="fas fa-layer-group"></i>
             </div>
             <div className="flex flex-col">
-              <span className="font-black text-slate-800 text-[10px] uppercase tracking-tighter">Mining Module</span>
-              <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">Capítulo 07</span>
+              <span className="font-black text-slate-800 text-[10px] uppercase tracking-tighter">Página Interactiva</span>
+              <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">Sección {currentPageIndex + 1}</span>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -141,7 +141,7 @@ const App: React.FC = () => {
       <main className="flex-1 overflow-y-auto p-6 pb-32 space-y-8 bg-gradient-to-b from-white to-slate-50">
         <div className="animate-fade-in-up">
           <div className="flex items-center gap-2 mb-2">
-            <span className="text-[9px] font-black text-indigo-600 uppercase tracking-widest">Tema de Análisis</span>
+            <span className="text-[9px] font-black text-indigo-600 uppercase tracking-widest">Tema Central</span>
           </div>
           <h2 className="text-3xl font-black text-slate-900 leading-[0.95] mb-2">
             {currentPage.title}
@@ -151,17 +151,17 @@ const App: React.FC = () => {
           <div className="space-y-6">
             <div className="bg-white p-7 rounded-[3rem] shadow-xl shadow-slate-200/50 border border-slate-100 relative overflow-hidden">
               <div className="absolute top-0 right-0 p-4 opacity-5">
-                <i className="fas fa-file-invoice text-7xl"></i>
+                <i className="fas fa-quote-right text-7xl"></i>
               </div>
               <h3 className="text-[9px] font-black uppercase tracking-[0.2em] text-indigo-400 mb-4 flex items-center gap-2">
-                <i className="fas fa-lightbulb"></i> Extraído del Libro
+                <i className="fas fa-lightbulb"></i> Idea Principal
               </h3>
               <p className="text-xl font-bold leading-tight text-slate-800 mb-6">"{currentPage.centralIdea}"</p>
               
               <div className="space-y-4">
                 {currentPage.teachingPoints.map((pt, i) => (
                   <div key={i} className="flex gap-4 items-start group">
-                    <div className="w-1 h-1 rounded-full bg-indigo-500 mt-2 shrink-0 group-hover:scale-150 transition-transform"></div>
+                    <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 mt-2 shrink-0 group-hover:scale-150 transition-transform"></div>
                     <span className="text-[13px] font-semibold text-slate-600 leading-snug">{pt}</span>
                   </div>
                 ))}
@@ -196,7 +196,7 @@ const App: React.FC = () => {
                   <div key={i} className={`w-1 h-1 rounded-full transition-all duration-500 ${currentPageIndex === i ? 'bg-indigo-600 scale-150' : 'bg-slate-200'}`} />
               ))}
           </div>
-          <span className="text-[8px] font-black text-slate-300 uppercase tracking-[0.3em]">Neural Progress</span>
+          <span className="text-[8px] font-black text-slate-300 uppercase tracking-[0.3em]">Progreso</span>
         </div>
 
         <button
@@ -222,6 +222,15 @@ const App: React.FC = () => {
           overscroll-behavior-y: contain;
         }
         ::-webkit-scrollbar { display: none; }
+        .animate-shake {
+          animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+        @keyframes shake {
+          10%, 90% { transform: translate3d(-1px, 0, 0); }
+          20%, 80% { transform: translate3d(2px, 0, 0); }
+          30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+          40%, 60% { transform: translate3d(4px, 0, 0); }
+        }
       `}</style>
     </div>
   );
